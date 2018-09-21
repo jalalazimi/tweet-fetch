@@ -32,10 +32,10 @@ export default class TweetFetch {
         secret: consumerSecret
       },
       signature_method: 'HMAC-SHA1',
-      hash_function: function(base_string: string, key: string) {
+      hash_function: function(baseString: string, key: string) {
         return crypto
           .createHmac('sha1', key)
-          .update(base_string)
+          .update(baseString)
           .digest('base64')
       }
     })
