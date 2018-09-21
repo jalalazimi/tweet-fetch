@@ -14,7 +14,7 @@ node_js:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
 script:
-  - yarn run test:prod && yarn run build
+  - yarn run build
 after_success:
   - yarn deploy-docs
   - yarn semantic-release
