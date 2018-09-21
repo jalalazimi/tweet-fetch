@@ -11,9 +11,11 @@ notifications:
   email: false
 node_js:
   - node
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
 script:
-  - npm run test:prod && npm run build
+  - yarn run test:prod && yarn run build
 after_success:
-  - npm run deploy-docs
-  - npm run semantic-release
+  - yarn deploy-docs
+  - yarn semantic-release
 
