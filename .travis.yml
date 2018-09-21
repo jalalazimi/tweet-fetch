@@ -4,7 +4,6 @@ branches:
     - /^v\d+\.\d+\.\d+$/
   only:
     - master
-    - /^greenkeeper/.*$/
 cache:
   yarn: true
   directories:
