@@ -15,7 +15,7 @@ const crypto = require('crypto')
 //
 // export default app;
 
-export default class tweetFetch {
+export default class TweetFetch {
   twitter: any
 
   constructor(TOKEN: any) {
