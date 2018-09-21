@@ -1,6 +1,6 @@
 {
   "name": "tweet-fetch",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "fetch tweet",
   "keywords": [],
   "main": "dist/tweetFetch.umd.js",
