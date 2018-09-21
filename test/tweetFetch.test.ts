@@ -1,14 +1,7 @@
-import tweetFetch from '../src/tweetFetch'
+import TweetFetch from '../src/tweetFetch'
 
-/**
- * Dummy test
- */
-describe('Dummy test', () => {
+describe('test', () => {
   it('works if true is truthy', () => {
     expect(true).toBeTruthy()
-  })
-
-  it('DummyClass is instantiable', () => {
-    expect(new DummyClass()).toBeInstanceOf(DummyClass)
   })
 })
