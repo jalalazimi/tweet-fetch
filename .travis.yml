@@ -1,5 +1,7 @@
 language: node_js
 branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
   only:
     - master
     - /^greenkeeper/.*$/
@@ -7,17 +9,20 @@ cache:
   yarn: true
   directories:
     - node_modules
+    - ~/.npm
 notifications:
   email: false
 node_js:
-  - node
+  - '10'
+  - '9'
+  - '8'
+  - '6'
 before_install:
-  - export GH_TOKEN=$GH_TOKEN
-  - export NPM_TOKEN=$NPM_TOKEN
   - curl -o- -L https://yarnpkg.com/install.sh | bash
 script:
   - yarn run build
 after_success:
   - yarn deploy-docs
-  - yarn semantic-release
+  - yarn run travis-deploy-once "yarn run semantic-release"
+
 
