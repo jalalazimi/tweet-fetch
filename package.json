@@ -35,7 +35,6 @@
     "precommit": "lint-staged",
     "travis-deploy-once": "travis-deploy-once",
     "prepushs": "npm run test:prod && npm run build",
-    "commitmsg": "commitlint -E GIT_PARAMS"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
