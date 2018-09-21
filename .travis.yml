@@ -12,6 +12,8 @@ notifications:
 node_js:
   - node
 before_install:
+  - export GH_TOKEN=$GH_TOKEN
+  - export NPM_TOKEN=$NPM_TOKEN
   - curl -o- -L https://yarnpkg.com/install.sh | bash
 script:
   - yarn run build
