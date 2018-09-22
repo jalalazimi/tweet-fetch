@@ -104,8 +104,7 @@ var TweetFetch = /** @class */ (function () {
             json: true
         };
         return new Promise(function (resolve, reject) {
-            _this.twitter
-                .get(options, function (err, response, tweets) { return __awaiter(_this, void 0, void 0, function () {
+            _this.twitter.get(options, function (err, response, tweets) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     if (err)
                         return [2 /*return*/, reject(err)];
@@ -123,8 +122,7 @@ var TweetFetch = /** @class */ (function () {
             json: true
         };
         return new Promise(function (resolve, reject) {
-            _this.twitter
-                .get(options, function (err, response, tweets) { return __awaiter(_this, void 0, void 0, function () {
+            _this.twitter.get(options, function (err, response, tweets) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     if (err)
                         return [2 /*return*/, reject(err)];
@@ -136,10 +134,11 @@ var TweetFetch = /** @class */ (function () {
     };
     TweetFetch.prototype.get = function (url) {
         var _this = this;
-        return Promise
-            .all([this.getData(url), this.getOembed(url)])
+        return Promise.all([this.getData(url), this.getOembed(url)])
             .then(function (tweet) {
-            return Object.assign(tweet[0], { full_text: _this.removeUserDataFromTweet(stripHtml(tweet[1].html)) });
+            return Object.assign(tweet[0], {
+                full_text: _this.removeUserDataFromTweet(stripHtml(tweet[1].html))
+            });
         })["catch"](function (err) {
             throw new Error(err);
         });

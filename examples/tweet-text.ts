@@ -18,7 +18,6 @@ tweetFetch.getData('https://twitter.com/farnazhoseini/status/1043388209206648832
     console.log(res)
   })
 
-
 tweetFetch.get('https://twitter.com/farnazhoseini/status/1043388209206648832')
   .then(res => {
     console.log(res)
