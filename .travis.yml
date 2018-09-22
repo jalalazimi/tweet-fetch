@@ -13,13 +13,13 @@ notifications:
   email: false
 node_js:
   - '9'
-before_deploy:
+before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - npm i -g makeshift && makeshift -s @bcoe -r https://registry.npmjs.org
-  - yarn run build
 after_deploy:
   - yarn deploy-docs
-
+before_deploy:
+  - yarn run build
 deploy:
   provider: npm
   email: ben@npmjs.com
