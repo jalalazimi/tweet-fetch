@@ -1,5 +1,9 @@
+import { throws } from 'assert'
+
 const OAuth = require('oauth-request')
 const crypto = require('crypto')
+const Joi = require('joi')
+const stripHtml = require('string-strip-html')
 
 // app.get('/', (req, res): void => {
 //   const {url} = req.query;
@@ -15,10 +19,22 @@ const crypto = require('crypto')
 //
 // export default app;
 
+const TokenSchema = Joi.object().keys({
+  consumer_key: Joi.string().required(),
+  consumer_secret: Joi.string().required(),
+  access_token_key: Joi.string().required(),
+  access_token_secret: Joi.string().required()
+})
+
 export default class TweetFetch {
   twitter: any
 
   constructor(TOKEN: any) {
+    Joi.validate(TOKEN, TokenSchema, (err: any) => {
+      if (err)
+        throw 'Error: Token is not valid! It should contains consumer_key,consumer_secret,access_token_key and access_token_secret'
+    })
+
     const {
       consumer_key: consumerKey,
       consumer_secret: consumerSecret,
@@ -46,11 +62,11 @@ export default class TweetFetch {
     })
   }
 
-  isValidTwitterUrl(url: string): boolean {
+  private isValidTwitterUrl(url: string): boolean {
     return /(^|[^'"])(https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+))/.test(url)
   }
 
-  extractingTweetIdFromURL(url: string): string {
+  private extractingTweetIdFromURL(url: string): string {
     if (!this.isValidTwitterUrl(url)) {
       throw new Error('not valid')
     }
@@ -58,7 +74,7 @@ export default class TweetFetch {
     return arr[arr.length - 1]
   }
 
-  removeUserDataFromTweet(t: string): string {
+  private removeUserDataFromTweet(t: string): string {
     return t.substr(0, t.lastIndexOf('—'))
   }
 
@@ -69,23 +85,36 @@ export default class TweetFetch {
       json: true
     }
     return new Promise((resolve, reject) => {
-      this.twitter.get(options, async (err: object, response: object, tweets: object) => {
+      this.twitter.get(options, async (err: any, response: object, tweets: any) => {
         if (err) return reject(err)
         resolve(tweets)
       })
     })
   }
-  async tweetData(url: string) {
+
+  getData(url: string) {
     const options = {
       url: 'https://api.twitter.com/1.1/statuses/show.json',
       qs: { id: this.extractingTweetIdFromURL(url) },
       json: true
     }
     return new Promise((resolve, reject) => {
-      this.twitter.get(options, async (err: object, response: object, tweets: object) => {
+      this.twitter.get(options, async (err: any, response: object, tweets: any) => {
         if (err) return reject(err)
         resolve(tweets)
       })
     })
+  }
+
+  get(url: string) {
+    return Promise.all([this.getData(url), this.getOembed(url)])
+      .then((tweet: any) => {
+        return Object.assign(tweet[0], {
+          full_text: this.removeUserDataFromTweet(stripHtml(tweet[1].html))
+        })
+      })
+      .catch(err => {
+        throw new Error(err)
+      })
   }
 }
