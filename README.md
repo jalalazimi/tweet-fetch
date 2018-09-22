@@ -1,4 +1,9 @@
-# Tweet-Fetch
+# Tweet-Fetch 
+[![GitHub license](https://img.shields.io/github/license/jalalazimi/tweet-fetch.svg)](https://github.com/jalalazimi/tweet-fetch/blob/master/LICENSE.md)
+[![Build Status](https://travis-ci.com/jalalazimi/tweet-fetch.svg?branch=master)](https://travis-ci.com/jalalazimi/tweet-fetch) 
+[![Coveralls github](https://img.shields.io/coveralls/github/jekyll/jekyll.svg)](https://github.com/jalalazimi/tweet-fetch)
+
+
 Get Tweet data by URL and ID from Twitter in NodeJS with using the twitter token.
 
 ```javascript
