@@ -1,8 +1,12 @@
 {
   "name": "tweet-fetch",
   "version": "1.0.8",
-  "description": "fetch tweet",
-  "keywords": [],
+  "description": "Get Tweet full text with data by URL from Twitter in NodeJS",
+  "keywords": [
+    "twitter",
+    "tweet",
+    "nodejs"
+  ],
   "main": "dist/tweetFetch.umd.js",
   "module": "dist/tweetFetch.es5.js",
   "typings": "dist/types/tweetFetch.d.ts",
@@ -22,7 +26,7 @@
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme default --excludePrivate --exclude '**/*.d.ts' --excludeExternals --includeDeclarations --mode file src",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -116,7 +120,6 @@
     "typescript": "^3.0.3"
   },
   "dependencies": {
-    "crypto": "^1.0.1",
     "joi": "^13.6.0",
     "oauth-request": "^0.1.0",
     "string-strip-html": "^3.2.0"
