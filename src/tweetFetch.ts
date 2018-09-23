@@ -92,10 +92,11 @@ export default class TweetFetch {
     })
   }
 
-  getData(url: string) {
+  getData(req: string) {
+    const id = this.isValidTwitterUrl(req) ? this.extractingTweetIdFromURL(req) : req
     const options = {
       url: 'https://api.twitter.com/1.1/statuses/show.json',
-      qs: { id: this.extractingTweetIdFromURL(url) },
+      qs: { id },
       json: true
     }
     return new Promise((resolve, reject) => {
@@ -106,8 +107,8 @@ export default class TweetFetch {
     })
   }
 
-  get(url: string) {
-    return Promise.all([this.getData(url), this.getOembed(url)])
+  get(req: string) {
+    return Promise.all([this.getData(req), this.getOembed(req)])
       .then((tweet: any) => {
         return Object.assign(tweet[0], {
           full_text: this.removeUserDataFromTweet(stripHtml(tweet[1].html))
