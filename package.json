@@ -1,6 +1,6 @@
 {
   "name": "tweet-fetch",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Get Tweet full text with data by URL from Twitter in NodeJS",
   "keywords": [
     "twitter",
