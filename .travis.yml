@@ -9,15 +9,22 @@ cache:
   directories:
     - node_modules
     - ~/.npm
+
 notifications:
   email: false
+
 node_js:
   - '9'
+
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - npm i -g makeshift && makeshift -s @bcoe -r https://registry.npmjs.org
+
 before_script:
-  - yarn run build
+ - yarn install
+
+script:
+  - yarn build
+
 after_success:
   - yarn deploy-docs
 
