@@ -98,5 +98,3 @@ tweetFetch.getData('TWEET_URL')
 ## License
 
 [MIT](https://opensource.org/licenses/MIT) © [Jalal Azimi](https://jalalazimi.github.io/)
-
-
